@@ -3,6 +3,8 @@
 #include <sstream>
 #include <algorithm>
 
+#include "usuario.h"
+
 using namespace std;
 
 /* COMANDOS */
@@ -11,7 +13,17 @@ string Sistema::quit() {
 }
 
 string Sistema::create_user (const string email, const string senha, const string nome) {
-  return "create_user NÃO IMPLEMENTADO";
+  Usuario novo_usuario(this->usuarios.size() + 1, nome, email, senha);
+
+  for(Usuario usuario : this->usuarios) {
+    if(usuario.get_email() == novo_usuario.get_email()) {
+      return "Usuário já existe";
+    }
+  }
+
+  this->usuarios.push_back(novo_usuario);
+
+  return "Usuário criado";
 }
 
 string Sistema::login(const string email, const string senha) {
