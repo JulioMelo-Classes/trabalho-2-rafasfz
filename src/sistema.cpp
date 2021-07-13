@@ -27,7 +27,16 @@ string Sistema::create_user (const string email, const string senha, const strin
 }
 
 string Sistema::login(const string email, const string senha) {
-  return "login NÃO IMPLEMENTADO";
+
+  for(Usuario usuario : this->usuarios) {
+    if(usuario.auth(email, senha)) {
+      usuariosLogados.insert(pair<int, pair<string, string>>(usuario.id, pair<string, string>("", "")));
+
+      return "Logado como " + email;
+    }
+  }
+
+  return "Senha ou usuário inválidos!";
 }
 
 string Sistema::disconnect(int id) {

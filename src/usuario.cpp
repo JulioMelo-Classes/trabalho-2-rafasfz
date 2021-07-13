@@ -15,3 +15,11 @@ Usuario::Usuario(int id, std::string nome, std::string email, std::string senha)
 string Usuario::get_email() {
   return this->email;
 }
+
+bool Usuario::auth(string email, string senha) {
+  if(this->email == email && this->senha == senha) {
+    return true;
+  }
+
+  return false;
+}
