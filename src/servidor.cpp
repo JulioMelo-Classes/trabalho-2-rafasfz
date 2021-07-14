@@ -20,3 +20,7 @@ int Servidor::get_dono_id() {
 void Servidor::set_descricao(std::string descricao) {
   this->descricao = descricao;
 }
+
+void Servidor::set_codigoConvite(std::string codigoConvite) {
+  this->codigoConvite = codigoConvite;
+}

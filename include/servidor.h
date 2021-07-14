@@ -21,6 +21,7 @@ class Servidor{
 		std::string get_nome();
 		int get_dono_id();
 		void set_descricao(std::string descricao);
+		void set_codigoConvite(std::string codigoConvite);
 
 };
 
