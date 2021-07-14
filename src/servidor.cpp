@@ -12,3 +12,11 @@ Servidor::Servidor(int usuarioDonoId, std::string nome) {
 string Servidor::get_nome() {
   return this->nome;
 }
+
+int Servidor::get_dono_id() {
+  return this->usuarioDonoId;
+}
+
+void Servidor::set_descricao(std::string descricao) {
+  this->descricao = descricao;
+}

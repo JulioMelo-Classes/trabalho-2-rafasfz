@@ -58,7 +58,7 @@ string Sistema::disconnect(int id) {
 }
 
 string Sistema::create_server(int id, const string nome) {
-std::map< int, std::pair<std::string, std::string> >::iterator usuario = usuariosLogados.find(id);
+  std::map< int, std::pair<std::string, std::string> >::iterator usuario = usuariosLogados.find(id);
 
   if(usuario != usuariosLogados.end()) {
 
@@ -78,7 +78,35 @@ std::map< int, std::pair<std::string, std::string> >::iterator usuario = usuario
 }
 
 string Sistema::set_server_desc(int id, const string nome, const string descricao) {
-  return "set_server_desc NÃO IMPLEMENTADO";
+  std::map< int, std::pair<std::string, std::string> >::iterator usuario = usuariosLogados.find(id);
+
+  if(usuario != usuariosLogados.end()) {
+    bool existe = false;
+    bool donoDoServidor = false;
+    for(Servidor servidor : this->servidores) {
+      if(servidor.get_nome() == nome) {
+        existe = true;
+        if(servidor.get_dono_id() == id) {
+          donoDoServidor = true;
+        }
+      }
+      
+      if(!existe)
+        return "Servidor '" + nome + "' não existe";
+      if(!donoDoServidor)
+        return "Você não pode alterar a descrição de um servidor que não foi criado por você";
+    }
+
+    for(int i = 0; i < this->servidores.size(); i++) {
+      if(this->servidores[i].get_nome() == nome) {
+        this->servidores[i].set_descricao(descricao);
+        return "Descrição do servidor ‘" + this->servidores[i].get_nome() + "’ modificada!";
+      }
+    }
+    
+  }
+
+  return "Não está conectado";
 }
 
 string Sistema::set_server_invite_code(int id, const string nome, const string codigo) {
