@@ -4,6 +4,7 @@
 #include <algorithm>
 
 #include "usuario.h"
+#include "servidor.h"
 
 using namespace std;
 
@@ -57,7 +58,23 @@ string Sistema::disconnect(int id) {
 }
 
 string Sistema::create_server(int id, const string nome) {
-  return "create_server NÃO IMPLEMENTADO";
+std::map< int, std::pair<std::string, std::string> >::iterator usuario = usuariosLogados.find(id);
+
+  if(usuario != usuariosLogados.end()) {
+
+    for(Servidor servidor : this->servidores) {
+      if(servidor.get_nome() == nome) {
+        return "Servidor com esse nome já existe";
+      }
+    }
+    
+    Servidor novoServidor(id, nome);
+    this->servidores.push_back(novoServidor);
+
+    return "Servidor criado";
+  }
+
+  return "Não está conectado";
 }
 
 string Sistema::set_server_desc(int id, const string nome, const string descricao) {
