@@ -40,7 +40,20 @@ string Sistema::login(const string email, const string senha) {
 }
 
 string Sistema::disconnect(int id) {
-  return "disconnect NÃO IMPLEMENTADO";
+  std::map< int, std::pair<std::string, std::string> >::iterator usuario = usuariosLogados.find(id);
+
+  if(usuario != usuariosLogados.end()) {
+    usuariosLogados.erase(id);
+    string nome;
+    for(auto usuarioLogado : this->usuarios) {
+      if(usuarioLogado.id == id)
+        nome = usuarioLogado.nome;
+    }
+
+    return "Desconectado usuário " + nome;
+  }
+
+  return "Não está conectado";
 }
 
 string Sistema::create_server(int id, const string nome) {
