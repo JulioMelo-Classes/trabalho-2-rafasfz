@@ -147,7 +147,16 @@ string Sistema::set_server_invite_code(int id, const string nome, const string c
 }
 
 string Sistema::list_servers(int id) {
-  return "list_servers NÃO IMPLEMENTADO";
+  if(this->servidores.size() == 0) {
+    return "";
+  }
+
+  string servidores_lista = this->servidores[0].get_nome();
+
+  for(int i = 1; i < this->servidores.size(); i++)
+    servidores_lista = servidores_lista + "\n" + this->servidores[i].get_nome();
+
+  return servidores_lista;
 }
 
 string Sistema::remove_server(int id, const string nome) {
