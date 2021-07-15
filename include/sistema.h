@@ -17,8 +17,23 @@ class Sistema {
 		std::vector<Usuario> usuarios; //<! um vetor com todos os usuários cadastrados
 		std::map< int, std::pair<std::string, std::string> > usuariosLogados; //<! um vetor contendo os usuários que logaram no sistema
 
+		/*! Valida se o usuario esta logado
+				@param id o id de um usuario
+				@return um bool true caso o usuario estaja logado e false caso não esteja logado
+		*/
 		bool usuario_logado(int id);
+
+		/*! Valida se um servidor existe
+				@param nome o nome do servidor
+				@return um bool true caso o servidor exista e false caso não exista
+		*/
 		bool servidor_existe(std::string nome);
+
+		/*! Valida se o usuário é dono do servidor
+				@param id o id de um usuario
+				@param nome o nome do servidor
+				@return um bool true caso o usuario seja dono do servidor e false caso o usuario não seja dono do
+		*/
 		bool usuario_dono_servidor(int id, std::string nome);
 		
 
