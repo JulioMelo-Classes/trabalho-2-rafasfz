@@ -160,7 +160,44 @@ string Sistema::list_servers(int id) {
 }
 
 string Sistema::remove_server(int id, const string nome) {
-  return "remove_server NÃO IMPLEMENTADO";
+  std::map< int, std::pair<std::string, std::string> >::iterator usuario = usuariosLogados.find(id);
+
+  if(usuario != usuariosLogados.end()) {
+    bool existe = false;
+    bool donoDoServidor = false;
+    int posicao = 0;
+    int posicao_atual = 0;
+    for(Servidor servidor : this->servidores) {
+      if(servidor.get_nome() == nome) {
+        existe = true;
+        posicao = posicao_atual;
+        if(servidor.get_dono_id() == id) {
+          donoDoServidor = true;
+        }
+      }
+      
+      posicao_atual++;
+    }
+
+    if(!existe)
+        return "Servidor '" + nome + "' não existe";
+      if(!donoDoServidor)
+        return "Você não pode alterar o código de convite de um servidor que não foi criado por você";
+
+    this->servidores.erase(this->servidores.begin()+posicao);
+
+    for(auto usuarioLogado : this->usuariosLogados) {
+      if(usuarioLogado.second.first == nome) {
+        usuarioLogado.second.first = "";
+        usuarioLogado.second.second = "";
+      }
+    }
+
+    return "Servidor '" + nome + "' removido";
+    
+  }
+
+  return "Não está conectado";
 }
 
 string Sistema::enter_server(int id, const string nome, const string codigo) {
