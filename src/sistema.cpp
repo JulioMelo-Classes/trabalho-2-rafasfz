@@ -41,109 +41,85 @@ string Sistema::login(const string email, const string senha) {
 }
 
 string Sistema::disconnect(int id) {
-  std::map< int, std::pair<std::string, std::string> >::iterator usuario = usuariosLogados.find(id);
 
-  if(usuario != usuariosLogados.end()) {
-    usuariosLogados.erase(id);
-    string nome;
-    for(auto usuarioLogado : this->usuarios) {
-      if(usuarioLogado.id == id)
-        nome = usuarioLogado.nome;
-    }
-
-    return "Desconectado usuário " + nome;
+  if(!this->usuario_logado(id)) {
+    return "Não está conectado";
   }
 
-  return "Não está conectado";
+  usuariosLogados.erase(id);
+  string nome;
+  for(auto usuarioLogado : this->usuarios) {
+    if(usuarioLogado.id == id)
+      nome = usuarioLogado.nome;
+  }
+
+  return "Desconectado usuário " + nome;
 }
 
 string Sistema::create_server(int id, const string nome) {
-  std::map< int, std::pair<std::string, std::string> >::iterator usuario = usuariosLogados.find(id);
 
-  if(usuario != usuariosLogados.end()) {
-
-    for(Servidor servidor : this->servidores) {
-      if(servidor.get_nome() == nome) {
-        return "Servidor com esse nome já existe";
-      }
-    }
-    
-    Servidor novoServidor(id, nome);
-    this->servidores.push_back(novoServidor);
-
-    return "Servidor criado";
+  if(!this->usuario_logado(id)) {
+    return "Não está conectado";
   }
 
-  return "Não está conectado";
+  for(Servidor servidor : this->servidores) {
+    if(servidor.get_nome() == nome) {
+      return "Servidor com esse nome já existe";
+    }
+  }
+    
+  Servidor novoServidor(id, nome);
+  this->servidores.push_back(novoServidor);
+
+  return "Servidor criado";
+
 }
 
 string Sistema::set_server_desc(int id, const string nome, const string descricao) {
-  std::map< int, std::pair<std::string, std::string> >::iterator usuario = usuariosLogados.find(id);
 
-  if(usuario != usuariosLogados.end()) {
-    bool existe = false;
-    bool donoDoServidor = false;
-    for(Servidor servidor : this->servidores) {
-      if(servidor.get_nome() == nome) {
-        existe = true;
-        if(servidor.get_dono_id() == id) {
-          donoDoServidor = true;
-        }
-      }
-      
-      if(!existe)
-        return "Servidor '" + nome + "' não existe";
-      if(!donoDoServidor)
-        return "Você não pode alterar a descrição de um servidor que não foi criado por você";
-    }
+  if(!this->usuario_logado(id))
+    return "Não está conectado";
 
-    for(int i = 0; i < this->servidores.size(); i++) {
-      if(this->servidores[i].get_nome() == nome) {
-        this->servidores[i].set_descricao(descricao);
-        return "Descrição do servidor ‘" + this->servidores[i].get_nome() + "’ modificada!";
-      }
+  if(!this->servidor_existe(nome))
+    return "Servidor '" + nome + "' não existe";
+
+  if(!this->usuario_dono_servidor(id, nome))
+    return "Você não pode alterar a descrição de um servidor que não foi criado por você";
+
+  for(int i = 0; i < this->servidores.size(); i++) {
+    if(this->servidores[i].get_nome() == nome) {
+      this->servidores[i].set_descricao(descricao);
+      return "Descrição do servidor ‘" + this->servidores[i].get_nome() + "’ modificada!";
     }
-    
   }
 
-  return "Não está conectado";
+  return "Algum erro ocorreu";
 }
 
 string Sistema::set_server_invite_code(int id, const string nome, const string codigo) {
-  std::map< int, std::pair<std::string, std::string> >::iterator usuario = usuariosLogados.find(id);
+  if(!this->usuario_logado(id))
+    return "Não está conectado";
 
-  if(usuario != usuariosLogados.end()) {
-    bool existe = false;
-    bool donoDoServidor = false;
-    for(Servidor servidor : this->servidores) {
-      if(servidor.get_nome() == nome) {
-        existe = true;
-        if(servidor.get_dono_id() == id) {
-          donoDoServidor = true;
-        }
-      }
-      
-      if(!existe)
-        return "Servidor '" + nome + "' não existe";
-      if(!donoDoServidor)
-        return "Você não pode alterar o código de convite de um servidor que não foi criado por você";
-    }
+  if(!this->servidor_existe(nome))
+    return "Servidor '" + nome + "' não existe";
 
-    for(int i = 0; i < this->servidores.size(); i++) {
-      if(this->servidores[i].get_nome() == nome) {
-        this->servidores[i].set_descricao(codigo);
+  if(!this->usuario_dono_servidor(id, nome))
+    return "Você não pode alterar a descrição de um servidor que não foi criado por você";
 
-        if(codigo == "") {
-          return "Código do servidor '" + this->servidores[i].get_nome() + "' removido!";
-        } else {
-          return "Código do servidor '" + this->servidores[i].get_nome() + "' modificado!";
-        }
+  for(int i = 0; i < this->servidores.size(); i++) {
+    if(this->servidores[i].get_nome() == nome) {
+      this->servidores[i].set_descricao(codigo);
+
+      if(codigo == "") {
+        return "Código do servidor '" + this->servidores[i].get_nome() + "' removido!";
+      } else {
+        return "Código do servidor '" + this->servidores[i].get_nome() + "' modificado!";
       }
     }
-    
   }
 
-  return "Não está conectado";
+  return "Algum erro ocorreu";
+
 }
 
 string Sistema::list_servers(int id) {
@@ -160,44 +136,35 @@ string Sistema::list_servers(int id) {
 }
 
 string Sistema::remove_server(int id, const string nome) {
-  std::map< int, std::pair<std::string, std::string> >::iterator usuario = usuariosLogados.find(id);
+  if(!this->usuario_logado(id))
+    return "Não está conectado";
 
-  if(usuario != usuariosLogados.end()) {
-    bool existe = false;
-    bool donoDoServidor = false;
-    int posicao = 0;
-    int posicao_atual = 0;
-    for(Servidor servidor : this->servidores) {
-      if(servidor.get_nome() == nome) {
-        existe = true;
-        posicao = posicao_atual;
-        if(servidor.get_dono_id() == id) {
-          donoDoServidor = true;
-        }
-      }
-      
-      posicao_atual++;
+  if(!this->servidor_existe(nome))
+    return "Servidor '" + nome + "' não existe";
+
+  if(!this->usuario_dono_servidor(id, nome))
+    return "Você não pode alterar a descrição de um servidor que não foi criado por você";
+
+  int posicao = 0;
+  int posicao_atual = 0;
+  for(Servidor servidor : this->servidores) {
+    if(servidor.get_nome() == nome) {
+      posicao = posicao_atual;
     }
-
-    if(!existe)
-        return "Servidor '" + nome + "' não existe";
-      if(!donoDoServidor)
-        return "Você não pode alterar o código de convite de um servidor que não foi criado por você";
-
-    this->servidores.erase(this->servidores.begin()+posicao);
-
-    for(auto usuarioLogado : this->usuariosLogados) {
-      if(usuarioLogado.second.first == nome) {
-        usuarioLogado.second.first = "";
-        usuarioLogado.second.second = "";
-      }
-    }
-
-    return "Servidor '" + nome + "' removido";
-    
+    posicao_atual++;
   }
 
-  return "Não está conectado";
+
+  this->servidores.erase(this->servidores.begin()+posicao);
+
+  for(auto usuarioLogado : this->usuariosLogados) {
+    if(usuarioLogado.second.first == nome) {
+      usuarioLogado.second.first = "";
+      usuarioLogado.second.second = "";
+    }
+  }
+
+  return "Servidor '" + nome + "' removido";
 }
 
 string Sistema::enter_server(int id, const string nome, const string codigo) {
@@ -240,3 +207,36 @@ string Sistema::list_messages(int id) {
 
 
 /* IMPLEMENTAR MÉTODOS PARA OS COMANDOS RESTANTES */
+
+
+bool Sistema::usuario_logado(int id) {
+  std::map< int, std::pair<std::string, std::string> >::iterator usuario = usuariosLogados.find(id);
+
+  if(usuario != usuariosLogados.end()) {
+    return true;
+  }
+
+  return false;
+}
+
+
+bool Sistema::servidor_existe(std::string nome) {
+  for(Servidor servidor : this->servidores) {
+    if(servidor.get_nome() == nome) {
+      return true;
+    }
+  }
+  return false;
+}
+
+bool Sistema::usuario_dono_servidor(int id, std::string nome) {
+  for(Servidor servidor : this->servidores) {
+    if(servidor.get_nome() == nome) {
+      if(servidor.get_dono_id() == id)
+        return true;
+      else
+        return false;
+    }    
+  }
+  return false;
+}

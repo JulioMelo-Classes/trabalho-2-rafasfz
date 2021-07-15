@@ -16,6 +16,10 @@ class Sistema {
 		std::vector<Servidor> servidores; //<! um vetor com todos os servidores
 		std::vector<Usuario> usuarios; //<! um vetor com todos os usuários cadastrados
 		std::map< int, std::pair<std::string, std::string> > usuariosLogados; //<! um vetor contendo os usuários que logaram no sistema
+
+		bool usuario_logado(int id);
+		bool servidor_existe(std::string nome);
+		bool usuario_dono_servidor(int id, std::string nome);
 		
 
   public:
