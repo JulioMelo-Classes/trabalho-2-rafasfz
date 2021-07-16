@@ -179,13 +179,13 @@ string Sistema::enter_server(int id, const string nome, const string codigo) {
 
   if(this->usuario_dono_servidor(id, nome)) {
     servidor->add_participante(id);
-    this->vizualizar_server(id, nome);
+    this->vizualizar_server_canal(id, nome, "");
 
     return "Entrou no servidor com sucesso";
   }
 
   if(servidor->add_participante(id, codigo)) {
-    this->vizualizar_server(id, nome);
+    this->vizualizar_server_canal(id, nome, "");
     return "Entrou no servidor com sucesso"; 
   }
 
@@ -276,10 +276,10 @@ Servidor* Sistema::get_server(std::string nome) {
   return &this->servidores[0];
 }
 
-void Sistema::vizualizar_server(int id, std::string nome) {
+void Sistema::vizualizar_server_canal(int id, std::string nomeServer, std::string nomeCanal) {
   std::map< int, std::pair<std::string, std::string> >::iterator usuario;
 
   usuario = this->usuariosLogados.find(id);
-  usuario->second.first = nome;
-  usuario->second.second = "";
+  usuario->second.first = nomeServer;
+  usuario->second.second = nomeCanal;
 }

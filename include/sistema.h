@@ -36,7 +36,7 @@ class Sistema {
 		*/
 		bool usuario_dono_servidor(int id, std::string nome);
 
-		void vizualizar_server(int id, std::string nome);
+		void vizualizar_server_canal(int id, std::string nomeServer, std::string nomeCanal);
 
 		Servidor* get_server(std::string nome);
 		
