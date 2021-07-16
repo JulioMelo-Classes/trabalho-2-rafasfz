@@ -35,6 +35,10 @@ class Sistema {
 				@return um bool true caso o usuario seja dono do servidor e false caso o usuario não seja dono do
 		*/
 		bool usuario_dono_servidor(int id, std::string nome);
+
+		void vizualizar_server(int id, std::string nome);
+
+		Servidor* get_server(std::string nome);
 		
 
   public:

@@ -108,7 +108,7 @@ string Sistema::set_server_invite_code(int id, const string nome, const string c
 
   for(int i = 0; i < this->servidores.size(); i++) {
     if(this->servidores[i].get_nome() == nome) {
-      this->servidores[i].set_descricao(codigo);
+      this->servidores[i].set_codigoConvite(codigo);
 
       if(codigo == "") {
         return "Código do servidor '" + this->servidores[i].get_nome() + "' removido!";
@@ -168,7 +168,32 @@ string Sistema::remove_server(int id, const string nome) {
 }
 
 string Sistema::enter_server(int id, const string nome, const string codigo) {
-  return "enter_server NÃO IMPLEMENTADO";
+  if(!this->usuario_logado(id))
+    return "Não está conectado";
+
+  if(!this->servidor_existe(nome))
+    return "Servidor '" + nome + "' não existe";
+
+  Servidor *servidor;
+  servidor = this->get_server(nome);
+
+  if(this->usuario_dono_servidor(id, nome)) {
+    servidor->add_participante(id);
+    this->vizualizar_server(id, nome);
+
+    return "Entrou no servidor com sucesso";
+  }
+
+  if(servidor->add_participante(id, codigo)) {
+    this->vizualizar_server(id, nome);
+    return "Entrou no servidor com sucesso"; 
+  }
+
+  if(codigo == "") {
+    return "Servidor requer código de convite";
+  }
+
+  return "Código de convite errado";
 }
 
 string Sistema::leave_server(int id, const string nome) {
@@ -239,4 +264,22 @@ bool Sistema::usuario_dono_servidor(int id, std::string nome) {
     }    
   }
   return false;
+}
+
+Servidor* Sistema::get_server(std::string nome) {
+  for(int i = 0; i < this->servidores.size(); i++) {
+    if(this->servidores[i].get_nome() == nome) {
+      return &this->servidores[i];
+    }
+  }
+
+  return &this->servidores[0];
+}
+
+void Sistema::vizualizar_server(int id, std::string nome) {
+  std::map< int, std::pair<std::string, std::string> >::iterator usuario;
+
+  usuario = this->usuariosLogados.find(id);
+  usuario->second.first = nome;
+  usuario->second.second = "";
 }

@@ -19,9 +19,12 @@ class Servidor{
 	public:
 		Servidor(int usuarioDonoId, std::string nome);
 		std::string get_nome();
+		std::string get_codigo_contive();
 		int get_dono_id();
 		void set_descricao(std::string descricao);
 		void set_codigoConvite(std::string codigoConvite);
+		void add_participante(int id);
+		bool add_participante(int id, std::string codigoConvite);
 
 };
 
