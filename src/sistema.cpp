@@ -177,6 +177,9 @@ string Sistema::enter_server(int id, const string nome, const string codigo) {
   Servidor *servidor;
   servidor = this->get_server(nome);
 
+  if(servidor->participa_servidor(id))
+    return "Você já participa desse servidor";
+
   if(this->usuario_dono_servidor(id, nome)) {
     servidor->add_participante(id);
     this->vizualizar_server_canal(id, nome, "");
@@ -222,7 +225,19 @@ string Sistema::leave_server(int id, const string nome) {
 }
 
 string Sistema::list_participants(int id) {
-  return "list_participants NÃO IMPLEMENTADO";
+  if(!this->usuario_logado(id))
+    return "Não está conectado";
+
+  std::map< int, std::pair<std::string, std::string> >::iterator usuario = usuariosLogados.find(id);
+
+  if(usuario->second.first == "")
+    return "Você não esta visualizando nenhum servidor";
+
+  Servidor *servidor = this->get_server(usuario->second.first);
+  
+  string participantes = servidor->lista_participantes(this->usuarios);
+  
+  return participantes;
 }
 
 string Sistema::list_channels(int id) {

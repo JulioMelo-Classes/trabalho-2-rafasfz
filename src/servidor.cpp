@@ -65,3 +65,22 @@ void Servidor::remover_participante(int id) {
 
   this->participantesIDs.erase(this->participantesIDs.begin()+posicao);
 }
+
+string Servidor::lista_participantes(vector<Usuario> usuarios) {
+  vector<string> lista_usuarios;
+
+  for(int id : this->participantesIDs) {
+    for(Usuario usuario : usuarios) {
+      if(usuario.id == id)
+        lista_usuarios.push_back(usuario.nome);
+    }
+  }
+
+  string usuarios_participantes = lista_usuarios[0];
+
+  for(int i = 1; i < lista_usuarios.size(); i++) {
+    usuarios_participantes = usuarios_participantes + "\n" + lista_usuarios[i];
+  }
+
+  return usuarios_participantes;
+}

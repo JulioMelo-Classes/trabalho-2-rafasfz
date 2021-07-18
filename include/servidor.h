@@ -6,6 +6,7 @@
 #include <vector>
 
 #include "canaltexto.h"
+#include "usuario.h"
 
 class Servidor{
 	private:
@@ -27,6 +28,7 @@ class Servidor{
 		void remover_participante(int id);
 		bool add_participante(int id, std::string codigoConvite);
 		bool participa_servidor(int id);
+		std::string lista_participantes(std::vector<Usuario> usuarios);
 
 };
 
