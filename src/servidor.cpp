@@ -84,3 +84,19 @@ string Servidor::lista_participantes(vector<Usuario> usuarios) {
 
   return usuarios_participantes;
 }
+
+string Servidor::lista_canais() {
+  string canais = "";
+
+  if(this->canaisTexto.size() == 0)
+    return "Nenhum canal nesse servidor";
+
+  for(int i = 0; i < this->canaisTexto.size(); i++) {
+    canais = canais + this->canaisTexto[i].get_nome();
+
+    if(i != this->canaisTexto.size() - 1)
+      canais = canais + "\n";
+  }
+
+  return canais;
+}

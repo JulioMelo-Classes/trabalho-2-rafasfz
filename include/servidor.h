@@ -29,6 +29,7 @@ class Servidor{
 		bool add_participante(int id, std::string codigoConvite);
 		bool participa_servidor(int id);
 		std::string lista_participantes(std::vector<Usuario> usuarios);
+		std::string lista_canais();
 
 };
 

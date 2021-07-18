@@ -31,6 +31,10 @@ string Sistema::login(const string email, const string senha) {
 
   for(Usuario usuario : this->usuarios) {
     if(usuario.auth(email, senha)) {
+      if(this->usuario_logado(usuario.id)) {
+        return "Você já esta logado";
+      }
+
       usuariosLogados.insert(pair<int, pair<string, string>>(usuario.id, pair<string, string>("", "")));
 
       return "Logado como " + email;
@@ -241,6 +245,18 @@ string Sistema::list_participants(int id) {
 }
 
 string Sistema::list_channels(int id) {
+  if(!this->usuario_logado(id))
+    return "Não está conectado";
+
+  std::map< int, std::pair<std::string, std::string> >::iterator usuario = usuariosLogados.find(id);
+
+  if(usuario->second.first == "")
+    return "Você não esta visualizando nenhum servidor";
+
+  Servidor *servidor = this->get_server(usuario->second.first);
+
+  string canais;
+
   return "list_channels NÃO IMPLEMENTADO";
 }
 

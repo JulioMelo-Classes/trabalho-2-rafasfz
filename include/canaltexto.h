@@ -10,6 +10,9 @@ class CanalTexto{
 	private:
 		std::string nome;
 		std::vector<Mensagem> mensagens;
+
+	public:
+		std::string get_nome();
 };
 
 #endif
