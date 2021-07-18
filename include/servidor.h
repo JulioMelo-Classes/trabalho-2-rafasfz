@@ -24,7 +24,9 @@ class Servidor{
 		void set_descricao(std::string descricao);
 		void set_codigoConvite(std::string codigoConvite);
 		void add_participante(int id);
+		void remover_participante(int id);
 		bool add_participante(int id, std::string codigoConvite);
+		bool participa_servidor(int id);
 
 };
 

@@ -197,7 +197,28 @@ string Sistema::enter_server(int id, const string nome, const string codigo) {
 }
 
 string Sistema::leave_server(int id, const string nome) {
-  return "leave_server NÃO IMPLEMENTADO";
+  if(!this->usuario_logado(id))
+    return "Não está conectado";
+
+  if(!this->servidor_existe(nome))
+    return "Servidor '" + nome + "' não existe";
+
+  Servidor *servidor;
+  servidor = this->get_server(nome);
+
+  if(!servidor->participa_servidor(id)) {
+    return "Você não participa desse servidor";
+  }
+
+  servidor->remover_participante(id);
+
+  std::map< int, std::pair<std::string, std::string> >::iterator usuario;
+  usuario = this->usuariosLogados.find(id);
+
+  if(usuario->second.first == nome)
+    this->vizualizar_server_canal(id, "", "");
+
+  return "Saindo do servidor '" + nome + "'";
 }
 
 string Sistema::list_participants(int id) {

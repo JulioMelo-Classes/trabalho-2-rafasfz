@@ -44,6 +44,24 @@ bool Servidor::add_participante(int id, std::string codigoConvite) {
   return false;
 }
 
-void vizualizar_server(int id, std::string nome) {
-  
+bool Servidor::participa_servidor(int id) {
+  for(int idParticipante : this->participantesIDs) {
+    if(idParticipante == id) {
+      return true;
+    }
+  } 
+
+  return false;
+}
+
+void Servidor::remover_participante(int id) {
+  int posicao = 0;
+  for(int idParticipante : this->participantesIDs) {
+    if(idParticipante == id) {
+      break;
+    }
+    posicao++;
+  }
+
+  this->participantesIDs.erase(this->participantesIDs.begin()+posicao);
 }
