@@ -25,9 +25,11 @@ class Servidor{
 		void set_descricao(std::string descricao);
 		void set_codigoConvite(std::string codigoConvite);
 		void add_participante(int id);
+		void add_canal_texto(CanalTexto canal);
 		void remover_participante(int id);
 		bool add_participante(int id, std::string codigoConvite);
 		bool participa_servidor(int id);
+		bool canal_existe(std::string nome);
 		std::string lista_participantes(std::vector<Usuario> usuarios);
 		std::string lista_canais();
 

@@ -34,6 +34,10 @@ void Servidor::add_participante(int id) {
   this->participantesIDs.push_back(id);
 }
 
+void Servidor::add_canal_texto(CanalTexto canal) {
+  this->canaisTexto.push_back(canal);
+}
+
 bool Servidor::add_participante(int id, std::string codigoConvite) {
 
   if(codigoConvite == this->codigoConvite || this->codigoConvite == "") {
@@ -50,6 +54,15 @@ bool Servidor::participa_servidor(int id) {
       return true;
     }
   } 
+
+  return false;
+}
+
+bool Servidor::canal_existe(std::string nome) {
+  for(auto canal : this->canaisTexto) {
+    if(canal.get_nome() == nome)
+      return true;
+  }
 
   return false;
 }

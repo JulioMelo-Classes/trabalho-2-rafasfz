@@ -5,6 +5,7 @@
 
 #include "usuario.h"
 #include "servidor.h"
+#include "canaltexto.h"
 
 using namespace std;
 
@@ -14,7 +15,7 @@ string Sistema::quit() {
 }
 
 string Sistema::create_user (const string email, const string senha, const string nome) {
-  Usuario novo_usuario(this->usuarios.size() + 1, nome, email, senha);
+  Usuario novo_usuario(this->usuarios.size(), nome, email, senha);
 
   for(Usuario usuario : this->usuarios) {
     if(usuario.get_email() == novo_usuario.get_email()) {
@@ -255,13 +256,33 @@ string Sistema::list_channels(int id) {
 
   Servidor *servidor = this->get_server(usuario->second.first);
 
-  string canais;
+  string canais = servidor->lista_canais();
 
-  return "list_channels NÃO IMPLEMENTADO";
+  return canais;
 }
 
 string Sistema::create_channel(int id, const string nome) {
-  return "create_channel NÃO IMPLEMENTADO";
+  if(!this->usuario_logado(id))
+    return "Não está conectado";
+
+  if(nome == "")
+    return "Para criar um canal, escolha um nome";
+
+  std::map< int, std::pair<std::string, std::string> >::iterator usuario = usuariosLogados.find(id);
+
+  if(usuario->second.first == "")
+    return "Você não esta visualizando nenhum servidor";
+
+  Servidor *servidor = this->get_server(usuario->second.first);
+
+  if(servidor->canal_existe(nome))
+    return "Canal de texto ‘" + nome + "’ já existe!";
+
+  CanalTexto novo_canal(nome);  
+
+  servidor->add_canal_texto(novo_canal);
+
+  return "Canal de texto ‘" + nome + "’ criado";
 }
 
 string Sistema::enter_channel(int id, const string nome) {
