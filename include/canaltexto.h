@@ -14,6 +14,7 @@ class CanalTexto{
 	public:
 		CanalTexto(std::string nome);
 		std::string get_nome();
+		void add_mensagem(Mensagem msg);
 };
 
 #endif

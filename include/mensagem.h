@@ -10,6 +10,9 @@ class Mensagem{
 		int enviadaPor;
 		std::string conteudo;
 
+	public:
+		Mensagem(int enviadaPor, std::string conteudo);
+
 };
 
 #endif

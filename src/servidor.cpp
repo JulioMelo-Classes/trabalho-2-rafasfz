@@ -1,6 +1,7 @@
 #include "servidor.h"
 #include <iostream>
 #include <string>
+#include "mensagem.h"
 
 using namespace std;
 
@@ -36,6 +37,16 @@ void Servidor::add_participante(int id) {
 
 void Servidor::add_canal_texto(CanalTexto canal) {
   this->canaisTexto.push_back(canal);
+}
+
+void Servidor::add_mensagem_canal(int id, std::string nomeCanal, std::string conteudo) {
+  Mensagem msg(id, conteudo);
+
+  for(int i = 0; i < canaisTexto.size(); i++) {
+    if(canaisTexto[i].get_nome() == nomeCanal) {
+      canaisTexto[i].add_mensagem(msg);
+    }
+  }
 }
 
 bool Servidor::add_participante(int id, std::string codigoConvite) {

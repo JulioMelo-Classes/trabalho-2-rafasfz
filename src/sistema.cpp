@@ -6,6 +6,7 @@
 #include "usuario.h"
 #include "servidor.h"
 #include "canaltexto.h"
+#include "mensagem.h"
 
 using namespace std;
 
@@ -324,7 +325,22 @@ string Sistema::leave_channel(int id) {
 }
 
 string Sistema::send_message(int id, const string mensagem) {
-  return "send_message NÃO IMPLEMENTADO";
+  if(!this->usuario_logado(id))
+    return "Não está conectado";
+
+  std::map< int, std::pair<std::string, std::string> >::iterator usuario = usuariosLogados.find(id);
+
+  if(usuario->second.first == "")
+    return "Você não esta visualizando nenhum servidor";
+
+  if(usuario->second.second == "")
+    return "Você não esta visualizando nenhum canal de texto";
+
+  Servidor *servidor = this->get_server(usuario->second.first);
+
+  servidor->add_mensagem_canal(id, usuario->second.second, mensagem);
+
+  return "Mensagem enviada";
 }
 
 string Sistema::list_messages(int id) {

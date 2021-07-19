@@ -27,6 +27,7 @@ class Servidor{
 		void add_participante(int id);
 		void add_canal_texto(CanalTexto canal);
 		void remover_participante(int id);
+		void add_mensagem_canal(int id, std::string nomeCanal, std::string conteudo);
 		bool add_participante(int id, std::string codigoConvite);
 		bool participa_servidor(int id);
 		bool canal_existe(std::string nome);

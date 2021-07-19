@@ -14,3 +14,4 @@ enter-channel 0 meu-canaltexto
 enter-channel 0 casa-de-mae-joana
 enter-channel 1 meu-canaltexto
 enter-channel 1 casa-de-mae-joana
+quit

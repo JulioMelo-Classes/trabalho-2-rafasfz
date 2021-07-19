@@ -11,3 +11,7 @@ CanalTexto::CanalTexto(string nome) {
 string CanalTexto::get_nome() {
   return this->nome;
 }
+
+void CanalTexto::add_mensagem(Mensagem msg) {
+  this->mensagens.push_back(msg);
+}

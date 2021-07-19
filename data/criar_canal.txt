@@ -9,3 +9,4 @@ create-channel 1 casa-de-mae-joana
 list-channels 0
 create-channel 0 meu-canaltexto
 list-channels 1
+quit
