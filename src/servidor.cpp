@@ -124,3 +124,13 @@ string Servidor::lista_canais() {
 
   return canais;
 }
+
+std::string Servidor::lista_mensagem_canal(std::vector<Usuario> usuarios, std::string nomeCanal) {
+  for(auto canal : this->canaisTexto) {
+    if(canal.get_nome() == nomeCanal) {
+      return canal.list_messages(usuarios);
+    }
+  }
+
+  return "Canal não encontrado";
+}

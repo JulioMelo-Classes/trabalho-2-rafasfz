@@ -16,4 +16,5 @@ enter-channel 1 meu-canaltexto
 enter-channel 1 casa-de-mae-joana
 send-message 0 Oi pessoal querem TC?
 send-message 1 Quero sim!
+list-messages 0
 quit

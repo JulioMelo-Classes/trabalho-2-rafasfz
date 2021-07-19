@@ -3,6 +3,8 @@
 
 #include <string>
 #include <iostream>
+#include <vector>
+#include <usuario.h>
 
 class Mensagem{
 	private:
@@ -12,6 +14,7 @@ class Mensagem{
 
 	public:
 		Mensagem(int enviadaPor, std::string conteudo);
+		std::string get_message(std::vector<Usuario> usuarios);
 
 };
 

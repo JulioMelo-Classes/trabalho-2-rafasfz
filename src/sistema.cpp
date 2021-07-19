@@ -344,7 +344,20 @@ string Sistema::send_message(int id, const string mensagem) {
 }
 
 string Sistema::list_messages(int id) {
-  return "list_messages NÃO IMPLEMENTADO";
+  if(!this->usuario_logado(id))
+    return "Não está conectado";
+
+  std::map< int, std::pair<std::string, std::string> >::iterator usuario = usuariosLogados.find(id);
+
+  if(usuario->second.first == "")
+    return "Você não esta visualizando nenhum servidor";
+
+  if(usuario->second.second == "")
+    return "Você não esta visualizando nenhum canal de texto";
+
+  Servidor *servidor = this->get_server(usuario->second.first);
+
+  return servidor->lista_mensagem_canal(this->usuarios, usuario->second.second);
 }
 
 

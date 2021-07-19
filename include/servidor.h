@@ -33,6 +33,7 @@ class Servidor{
 		bool canal_existe(std::string nome);
 		std::string lista_participantes(std::vector<Usuario> usuarios);
 		std::string lista_canais();
+		std::string lista_mensagem_canal(std::vector<Usuario> usuarios, std::string nomeCanal);
 
 };
 
