@@ -1,0 +1,16 @@
+create-user rafaelsilvafreire@gmail.com 321 rafael silva freire
+create-user joao@gmail.com 1234 joao vitor
+login joao@gmail.com 1234
+login rafaelsilvafreire@gmail.com 321
+create-server 0 meu-server
+enter-server 0 meu-server
+enter-server 1 meu-server
+create-channel 1 casa-de-mae-joana
+list-channels 0
+create-channel 0 meu-canaltexto
+list-channels 1
+enter-channel 0 canal-que-nao-existe
+enter-channel 0 meu-canaltexto
+enter-channel 0 casa-de-mae-joana
+enter-channel 1 meu-canaltexto
+enter-channel 1 casa-de-mae-joana

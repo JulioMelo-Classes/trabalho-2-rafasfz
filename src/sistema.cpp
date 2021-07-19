@@ -286,7 +286,25 @@ string Sistema::create_channel(int id, const string nome) {
 }
 
 string Sistema::enter_channel(int id, const string nome) {
-  return "enter_channel NÃO IMPLEMENTADO";
+  if(!this->usuario_logado(id))
+    return "Não está conectado";
+
+  if(nome == "")
+    return "Escreva o nome do canal no comando.";
+
+  std::map< int, std::pair<std::string, std::string> >::iterator usuario = usuariosLogados.find(id);
+
+  if(usuario->second.first == "")
+    return "Você não esta visualizando nenhum servidor";
+
+  Servidor *servidor = this->get_server(usuario->second.first);
+
+  if(!servidor->canal_existe(nome))
+    return "Canal ‘" + nome + "’ não existe no servidor " + usuario->second.first;
+
+  usuario->second.second = nome;
+
+  return "Entrou no canal ‘" + nome + "’";;
 }
 
 string Sistema::leave_channel(int id) {
