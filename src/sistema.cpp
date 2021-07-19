@@ -308,7 +308,19 @@ string Sistema::enter_channel(int id, const string nome) {
 }
 
 string Sistema::leave_channel(int id) {
-  return "leave_channel NÃO IMPLEMENTADO";
+  if(!this->usuario_logado(id))
+    return "Não está conectado";
+
+  std::map< int, std::pair<std::string, std::string> >::iterator usuario = usuariosLogados.find(id);
+
+  if(usuario->second.first == "")
+    return "Você não esta visualizando nenhum servidor";
+
+  Servidor *servidor = this->get_server(usuario->second.first);
+
+  usuario->second.first == "";
+    
+  return "Saindo do canal";
 }
 
 string Sistema::send_message(int id, const string mensagem) {
