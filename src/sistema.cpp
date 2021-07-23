@@ -405,7 +405,7 @@ Servidor* Sistema::get_server(std::string nome) {
     }
   }
 
-  return &this->servidores[0];
+  return nullptr;
 }
 
 void Sistema::vizualizar_server_canal(int id, std::string nomeServer, std::string nomeCanal) {
