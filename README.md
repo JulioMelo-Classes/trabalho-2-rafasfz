@@ -1,28 +1,19 @@
-# Base para a atividade 02 de LP1
+# Projeto 2: Concordo
+## Clone do Discord, para humanos mais civilizados.
 
-Use esse esqueleto de classes para iniciar a terceira atividade.
+Concordo é um sistema similar ao Discord, mas que funciona somente em modo texto em sem recursos de rede. A ideia é simular o "backend" do serviço de forma simplificada.
 
-Existe um executor que faz a interpretação dos comandos e executa o método correto do sistema.
 
-## Para compilar
+## 🖥️ Compilando o projeto
 
-Com makefiles:
 ```console
-mkdir build
-make
-```
-
-Com cmake:
-```console
-mkdir build
+git clone https://github.com/JulioMelo-Classes/trabalho-2-rafasfz.git
 cd build
 cmake ..
 cmake --build .
 ```
 
-Escolha uma das duas formas de build e ignore a outra.
-
-## Para executar
+## 🤖 Executando o projeto
 Você pode rodar o sistema e em logo depois digitar os comandos seguidos de ENTER
 ```console
 ./concordo
