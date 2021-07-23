@@ -1,15 +1,19 @@
-create-user rafaelsilvafreire@gmail.com 321 rafael silva freire
-create-user joao@gmail.com 1234 joao vitor
+create-user rafaelsilvafreire@gmail.com 321 rafasfz
+create-user joao@gmail.com 1234 Kill4Trash
 login joao@gmail.com 1234
 login rafaelsilvafreire@gmail.com 321
+create-user david@gmail.com 123 David Yuri
+login david@gmail.com 123
 create-server 0 meu-server
 enter-server 0 meu-server
 enter-server 1 meu-server
+enter-server 2 meu-server
 create-channel 1 casa-de-mae-joana
 list-channels 0
 create-channel 0 meu-canaltexto
 list-channels 1
 enter-channel 0 canal-que-nao-existe
+enter-channel 2 meu-canaltexto
 enter-channel 0 meu-canaltexto
 enter-channel 0 casa-de-mae-joana
 enter-channel 1 meu-canaltexto
@@ -17,4 +21,8 @@ enter-channel 1 casa-de-mae-joana
 send-message 0 Oi pessoal querem TC?
 send-message 1 Quero sim!
 list-messages 0
+send-message 0 BLZ
+list-messages 0
+send-message 2 Essa mensagem tem que esta indo em outro canal!!!
+list-messages 2
 quit

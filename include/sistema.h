@@ -36,8 +36,17 @@ class Sistema {
 		*/
 		bool usuario_dono_servidor(int id, std::string nome);
 
+		/*! Faz um usuario vizualizar um canal de um servidor
+				@param id o id de um usuario
+				@param nomeServer o nome do servidor
+				@param nomeCanal o nome do canal
+		*/
 		void vizualizar_server_canal(int id, std::string nomeServer, std::string nomeCanal);
 
+		/*! Pega um servidor pelo nome
+				@param nome o nome do servidor
+				@return A referência de memoria do servidor
+		*/
 		Servidor* get_server(std::string nome);
 		
 
