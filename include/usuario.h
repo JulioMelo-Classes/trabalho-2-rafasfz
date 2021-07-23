@@ -19,7 +19,6 @@ class Usuario{
 				@param nome string com o nome do usuario
 				@param email string email do usuario
 				@param senha string senha do usuario
-				@return um booleano contedo true caso o email e a senha do usuario estejam corretas e false caso o contrario
 		*/
 		Usuario(int id, std::string nome, std::string email, std::string senha);
 
