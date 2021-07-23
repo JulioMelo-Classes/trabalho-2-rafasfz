@@ -13,7 +13,15 @@ class Usuario{
 		int id; //<! um inteiro com id do usuario
 		std::string nome; //<! uma string com nome do usuario
 		std::string email; //<! uma string com o email do usuario
-		Usuario(int id, std::string nome, std::string email, std::string senha);  //<! Costrutor incializando id, nome, email e a senha
+
+		/*! Construtor para incializar a classe
+				@param id inteiro com o id do usuario
+				@param nome string com o nome do usuario
+				@param email string email do usuario
+				@param senha string senha do usuario
+				@return um booleano contedo true caso o email e a senha do usuario estejam corretas e false caso o contrario
+		*/
+		Usuario(int id, std::string nome, std::string email, std::string senha);
 
 		/*! Get para o atributo email
 				@return retorna uma string com o email do usuario
