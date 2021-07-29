@@ -7,7 +7,9 @@
 
 #include "canaltexto.h"
 #include "usuario.h"
-
+/*
+CP1 classe servidor ok
+*/
 // Classe para o modelo de Servidor do concordo
 class Servidor{
 	private:

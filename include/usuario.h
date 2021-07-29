@@ -4,6 +4,9 @@
 #include <string>
 #include <iostream>
 
+/*
+CP1 classe usuário ok
+*/
 // Classe para o modelo de usuarios do concordo
 class Usuario{
 	private:

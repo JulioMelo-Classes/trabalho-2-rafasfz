@@ -15,6 +15,9 @@ string Sistema::quit() {
   return "Saindo...";
 }
 
+/*
+A1.2 ok
+*/
 string Sistema::create_user (const string email, const string senha, const string nome) {
   Usuario novo_usuario(this->usuarios.size(), nome, email, senha);
 
@@ -29,6 +32,9 @@ string Sistema::create_user (const string email, const string senha, const strin
   return "Usuário criado";
 }
 
+/*
+A1.3 ok
+*/
 string Sistema::login(const string email, const string senha) {
 
   for(Usuario usuario : this->usuarios) {
@@ -37,6 +43,7 @@ string Sistema::login(const string email, const string senha) {
         return "Você já esta logado";
       }
 
+      //aqui vc poderia fazer .insert({usuario.id, {"", ""}});
       usuariosLogados.insert(pair<int, pair<string, string>>(usuario.id, pair<string, string>("", "")));
 
       return "Logado como " + email;
@@ -46,6 +53,9 @@ string Sistema::login(const string email, const string senha) {
   return "Senha ou usuário inválidos!";
 }
 
+/*
+A2.1 ok
+*/
 string Sistema::disconnect(int id) {
 
   if(!this->usuario_logado(id)) {
@@ -62,6 +72,9 @@ string Sistema::disconnect(int id) {
   return "Desconectado usuário " + nome;
 }
 
+/*
+A2.2 ok
+*/
 string Sistema::create_server(int id, const string nome) {
 
   if(!this->usuario_logado(id)) {
@@ -81,6 +94,9 @@ string Sistema::create_server(int id, const string nome) {
 
 }
 
+/*
+A2.3 ok
+*/
 string Sistema::set_server_desc(int id, const string nome, const string descricao) {
 
   if(!this->usuario_logado(id))
@@ -99,9 +115,12 @@ string Sistema::set_server_desc(int id, const string nome, const string descrica
     }
   }
 
-  return "Algum erro ocorreu";
+  return "Algum erro ocorreu"; //vc colocou por causa de algum warning? realmente não tem necessidade
 }
 
+/*
+A2.4 ok
+*/
 string Sistema::set_server_invite_code(int id, const string nome, const string codigo) {
   if(!this->usuario_logado(id))
     return "Não está conectado";
@@ -128,6 +147,9 @@ string Sistema::set_server_invite_code(int id, const string nome, const string c
 
 }
 
+/*
+A2.5 ok
+*/
 string Sistema::list_servers(int id) {
   if(this->servidores.size() == 0) {
     return "";
@@ -141,6 +163,9 @@ string Sistema::list_servers(int id) {
   return servidores_lista;
 }
 
+/*
+A2.6 ok
+*/
 string Sistema::remove_server(int id, const string nome) {
   if(!this->usuario_logado(id))
     return "Não está conectado";
