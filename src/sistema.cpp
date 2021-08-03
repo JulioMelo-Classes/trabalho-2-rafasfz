@@ -163,12 +163,7 @@ string Sistema::remove_server(int id, const string nome) {
 
   this->servidores.erase(this->servidores.begin()+posicao);
 
-  for(auto usuarioLogado : this->usuariosLogados) {
-    if(usuarioLogado.second.first == nome) {
-      usuarioLogado.second.first = "";
-      usuarioLogado.second.second = "";
-    }
-  }
+  this->vizualizar_server_canal(id, "", "");
 
   return "Servidor '" + nome + "' removido";
 }
