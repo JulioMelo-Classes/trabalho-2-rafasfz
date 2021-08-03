@@ -21,5 +21,14 @@ Você pode rodar o sistema e em logo depois digitar os comandos seguidos de ENTE
 
 Ou pode criar um arquivo de texto com uma lista de comandos (um por linha) e executar o sistema redirecionando esse arquivo como entrada padrão:
 ```console
-./concordo < script_comandos.txt
+./concordo < ../data/script_comandos.txt
+```
+
+## 🤖 Executando caso testes
+```console
+./concordo < ../data/script_comandos.txt
+./concordo < ../data/criar_canal.txt
+./concordo < ../data/entrar_canal.txt
+./concordo < ../data/sair_canal.txt
+./concordo < ../data/enviar_mensagem.txt.txt
 ```
