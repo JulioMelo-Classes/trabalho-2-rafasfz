@@ -110,7 +110,7 @@ string Sistema::set_server_invite_code(int id, const string nome, const string c
     return "Servidor '" + nome + "' não existe";
 
   if(!this->usuario_dono_servidor(id, nome))
-    return "Você não pode alterar a descrição de um servidor que não foi criado por você";
+    return "Você não pode alterar o código de convite de um servidor que não foi criado por você";
 
   for(int i = 0; i < this->servidores.size(); i++) {
     if(this->servidores[i].get_nome() == nome) {
