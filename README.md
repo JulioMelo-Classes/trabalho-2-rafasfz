@@ -27,8 +27,9 @@ Ou pode criar um arquivo de texto com uma lista de comandos (um por linha) e exe
 ## 🤖 Executando caso testes
 ```console
 ./concordo < ../data/script_comandos.txt
+./concordo < ../data/erros.txt
 ./concordo < ../data/criar_canal.txt
 ./concordo < ../data/entrar_canal.txt
 ./concordo < ../data/sair_canal.txt
-./concordo < ../data/enviar_mensagem.txt.txt
+./concordo < ../data/enviar_mensagem.txt
 ```

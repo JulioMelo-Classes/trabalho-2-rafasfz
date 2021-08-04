@@ -1,0 +1,11 @@
+create-user rafaelsilvafreire@gmail.com 321 rafasfz
+login rafaelsilvafreire@gmail.com senha_errada
+login rafaelsilvafreire@gmail.com 321
+create-user joao@gmail.com 1234 Kill4Trash
+login joao@gmail.com 1234
+create-server 0 meu-server
+set-server-invite-code 1 meu-server esse-server-nao-e-meu
+set-server-invite-code 0 meu-server 654
+enter-server 0 meu-server
+enter-server 1 meu-server nao-tenho-codigo
+enter-server 1 meu-server 654
