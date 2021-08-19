@@ -5,7 +5,9 @@
 #include <iostream>
 #include <vector>
 #include <usuario.h>
-
+/*
+cp2 ok
+*/
 // Classe para o modelo de mensagens do concordo
 class Mensagem{
 	private:

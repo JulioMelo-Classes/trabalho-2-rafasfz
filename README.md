@@ -25,6 +25,7 @@ Ou pode criar um arquivo de texto com uma lista de comandos (um por linha) e exe
 ```
 
 ## 🤖 Executando caso testes
+<!--embora você não tenha documentado extensivamente, dá para ter alguma ideia dos testes pelo nome dos arquivos, vou considerar 100%-->
 ```console
 ./concordo < ../data/script_comandos.txt
 ./concordo < ../data/erros.txt

@@ -95,7 +95,7 @@ string Sistema::set_server_desc(int id, const string nome, const string descrica
   for(int i = 0; i < this->servidores.size(); i++) {
     if(this->servidores[i].get_nome() == nome) {
       this->servidores[i].set_descricao(descricao);
-      return "Descrição do servidor ‘" + this->servidores[i].get_nome() + "’ modificada!";
+      return "Descrição do servidor '" + this->servidores[i].get_nome() + "' modificada!";
     }
   }
 
@@ -168,6 +168,10 @@ string Sistema::remove_server(int id, const string nome) {
   return "Servidor '" + nome + "' removido";
 }
 
+/*
+A2.7 0,8
+- quando o usuário usa enter-server deve ser atualizado qual servidor ele está visualizando, mesmo que ele já faça parte do servidor. 20% a menos
+*/
 string Sistema::enter_server(int id, const string nome, const string codigo) {
   if(!this->usuario_logado(id))
     return "Não está conectado";
@@ -178,7 +182,7 @@ string Sistema::enter_server(int id, const string nome, const string codigo) {
   Servidor *servidor;
   servidor = this->get_server(nome);
 
-  if(servidor->participa_servidor(id))
+  if(servidor->participa_servidor(id)) //esse comportamento deveria atualizar o servidor visualizado! vou tirar 20% por isso
     return "Você já participa desse servidor";
 
   if(this->usuario_dono_servidor(id, nome)) {
@@ -200,6 +204,9 @@ string Sistema::enter_server(int id, const string nome, const string codigo) {
   return "Código de convite errado";
 }
 
+/*
+A2.8 ok
+*/
 string Sistema::leave_server(int id, const string nome) {
   if(!this->usuario_logado(id))
     return "Não está conectado";
@@ -224,7 +231,9 @@ string Sistema::leave_server(int id, const string nome) {
 
   return "Saindo do servidor '" + nome + "'";
 }
-
+/*
+A2.9 ok
+*/
 string Sistema::list_participants(int id) {
   if(!this->usuario_logado(id))
     return "Não está conectado";
@@ -241,6 +250,9 @@ string Sistema::list_participants(int id) {
   return participantes;
 }
 
+/*
+B1.1 ok
+*/
 string Sistema::list_channels(int id) {
   if(!this->usuario_logado(id))
     return "Não está conectado";
@@ -257,6 +269,9 @@ string Sistema::list_channels(int id) {
   return canais;
 }
 
+/*
+B1.2 ok
+*/
 string Sistema::create_channel(int id, const string nome) {
   if(!this->usuario_logado(id))
     return "Não está conectado";
@@ -272,15 +287,18 @@ string Sistema::create_channel(int id, const string nome) {
   Servidor *servidor = this->get_server(usuario->second.first);
 
   if(servidor->canal_existe(nome))
-    return "Canal de texto ‘" + nome + "’ já existe!";
+    return "Canal de texto '" + nome + "' já existe!";
 
   CanalTexto novo_canal(nome);  
 
   servidor->add_canal_texto(novo_canal);
 
-  return "Canal de texto ‘" + nome + "’ criado";
+  return "Canal de texto '" + nome + "' criado";
 }
 
+/*
+B1.3 ok
+*/
 string Sistema::enter_channel(int id, const string nome) {
   if(!this->usuario_logado(id))
     return "Não está conectado";
@@ -296,13 +314,16 @@ string Sistema::enter_channel(int id, const string nome) {
   Servidor *servidor = this->get_server(usuario->second.first);
 
   if(!servidor->canal_existe(nome))
-    return "Canal ‘" + nome + "’ não existe no servidor " + usuario->second.first;
+    return "Canal '" + nome + "' não existe no servidor " + usuario->second.first;
 
   usuario->second.second = nome;
 
-  return "Entrou no canal ‘" + nome + "’";;
+  return "Entrou no canal '" + nome + "'";;
 }
 
+/*
+B1.4 ok
+*/
 string Sistema::leave_channel(int id) {
   if(!this->usuario_logado(id))
     return "Não está conectado";

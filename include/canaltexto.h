@@ -7,6 +7,9 @@
 #include "usuario.h"
 #include "mensagem.h"
 
+/*
+Cp2 ok
+*/
 // Classe para o modelo de Canal do concordo
 class CanalTexto{
 	private:
